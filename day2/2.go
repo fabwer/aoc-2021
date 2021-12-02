@@ -13,7 +13,7 @@ func main() {
 	// part 1
 	fmt.Println(calcPosition(lines))
 
-	// part 1
+	// part 2
 	fmt.Println(calcPositionWithAim(lines))
 }
 
