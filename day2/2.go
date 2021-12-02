@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	lines := utils.ReadStringsFromFile("2_input.txt")
+	lines := utils.ReadLinesFromFile("2_input")
 
 	// part 1
 	fmt.Println(calcPosition(lines))

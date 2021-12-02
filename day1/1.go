@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	measurements := u.ReadNumbersFromFile("1_input.txt")
+	measurements := u.ConvertStringsToInts(u.ReadLinesFromFile("1_input"))
 
 	// part 1
 	fmt.Println(countMovingWindow(measurements, 1))

@@ -2,58 +2,50 @@ package utils
 
 import (
 	"bufio"
-	"log"
 	"os"
 	"path/filepath"
 	"strconv"
 )
 
-func ReadNumbersFromFile(filename string) []int {
-	absPath, _ := filepath.Abs("input/" + filename)
-
-	file, openErr := os.Open(absPath)
-	if openErr != nil {
-		log.Fatalf("failed to open")
-	}
+func ReadLinesFromFile(filename string) []string {
+	file := openFile(filename)
+	defer closeFile(file)
 
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
 
-	var numbers []int
-	for scanner.Scan() {
-		x, _ := strconv.Atoi(scanner.Text())
-		numbers = append(numbers, x)
-	}
-
-	closeErr := file.Close()
-	if closeErr != nil {
-		return []int{}
-	}
-
-	return numbers
-}
-
-func ReadStringsFromFile(filename string) []string {
-	absPath, _ := filepath.Abs("input/" + filename)
-
-	file, openErr := os.Open(absPath)
-	if openErr != nil {
-		log.Fatalf("failed to open")
-	}
-
-	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-
-	var strings []string
+	var lines []string
 	for scanner.Scan() {
 		x := scanner.Text()
-		strings = append(strings, x)
+		lines = append(lines, x)
 	}
 
+	return lines
+}
+
+func ConvertStringsToInts(strings []string) []int {
+	var ints []int
+	for _, s := range strings {
+		x, _ := strconv.Atoi(s)
+		ints = append(ints, x)
+	}
+	return ints
+}
+
+func openFile(filename string) *os.File {
+	absPath, _ := filepath.Abs("input/" + filename)
+
+	file, openErr := os.Open(absPath)
+	if openErr != nil {
+		panic(openErr)
+	}
+
+	return file
+}
+
+func closeFile(file *os.File) {
 	closeErr := file.Close()
 	if closeErr != nil {
-		return []string{}
+		panic(closeErr)
 	}
-
-	return strings
 }
