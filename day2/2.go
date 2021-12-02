@@ -22,12 +22,13 @@ func calcPosition(lines []string) int {
 	posZ := 0
 
 	for _, line := range lines {
-		number, _ := strconv.Atoi(line[len(line)-1:])
-		if strings.Contains(line, "forward") {
+		command, number := parseCommandAndNumber(line)
+
+		if command == "forward" {
 			posX += number
-		} else if strings.Contains(line, "up") {
+		} else if command == "up" {
 			posZ -= number
-		} else if strings.Contains(line, "down") {
+		} else if command == "down" {
 			posZ += number
 		}
 	}
@@ -41,16 +42,25 @@ func calcPositionWithAim(lines []string) int {
 	aim := 0
 
 	for _, line := range lines {
-		number, _ := strconv.Atoi(line[len(line)-1:])
-		if strings.Contains(line, "forward") {
+		command, number := parseCommandAndNumber(line)
+
+		if command == "forward" {
 			posX += number
 			posZ += number * aim
-		} else if strings.Contains(line, "up") {
+		} else if command == "up" {
 			aim -= number
-		} else if strings.Contains(line, "down") {
+		} else if command == "down" {
 			aim += number
 		}
 	}
 
 	return posX * posZ
+}
+
+func parseCommandAndNumber(line string) (string, int) {
+	args := strings.Fields(line)
+	command := args[0]
+	number, _ := strconv.Atoi(args[1])
+
+	return command, number
 }
