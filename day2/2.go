@@ -24,11 +24,11 @@ func calcPosition(lines []string) int {
 	for _, line := range lines {
 		command, number := parseCommandAndNumber(line)
 
-		if command == "forward" {
+		if command == "f" {
 			posX += number
-		} else if command == "up" {
+		} else if command == "u" {
 			posZ -= number
-		} else if command == "down" {
+		} else if command == "d" {
 			posZ += number
 		}
 	}
@@ -44,12 +44,12 @@ func calcPositionWithAim(lines []string) int {
 	for _, line := range lines {
 		command, number := parseCommandAndNumber(line)
 
-		if command == "forward" {
+		if command == "f" {
 			posX += number
 			posZ += number * aim
-		} else if command == "up" {
+		} else if command == "u" {
 			aim -= number
-		} else if command == "down" {
+		} else if command == "d" {
 			aim += number
 		}
 	}
@@ -62,5 +62,5 @@ func parseCommandAndNumber(line string) (string, int) {
 	command := args[0]
 	number, _ := strconv.Atoi(args[1])
 
-	return command, number
+	return command[0:1], number
 }
