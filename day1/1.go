@@ -8,10 +8,10 @@ import (
 func main() {
 	measurements := u.ReadNumbersFromFile("1_input.txt")
 
-	// first
+	// part 1
 	fmt.Println(countMovingWindow(measurements, 1))
 
-	// second
+	// part 2
 	fmt.Println(countMovingWindow(measurements, 3))
 }
 
