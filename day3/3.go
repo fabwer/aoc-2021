@@ -15,13 +15,13 @@ func main() {
 	lines := utils.ReadLinesFromFile("3_input")
 
 	// part 1
-	fmt.Println(calcPowerConsuption(lines))
+	fmt.Println(calcPowerConsumption(lines))
 
 	// part 2
 	fmt.Println(calcLifeSupportRating(lines))
 }
 
-func calcPowerConsuption(lines []string) int64 {
+func calcPowerConsumption(lines []string) int64 {
 	gamma := ""
 	epsilon := ""
 
